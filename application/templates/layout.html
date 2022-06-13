@@ -11,7 +11,20 @@
     {% else %}
         <title>PROYECTO MOVii</title>
     {% endif %}
-</head>
+    <style type="text/css">
+      html,
+      body {
+          height: 95%;
+      }
+      #bg {
+          height: 100%;
+          background: #DBE2E9;
+          text-align: center;
+          color: black;
+      }
+  </style>
+
+  </head>
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark flex-md-row-reverse" style="background-color: crimson">
@@ -24,7 +37,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <span class="navbar-text font-weight-bold text-dark px-3">
+            <span class="navbar-text font-weight-bold text-dark px-5">
                 DS4A TEAM 4
             </span>
             <li class="nav-item px-3">
@@ -39,20 +52,69 @@
           </ul>
         </div>
       </nav>
-
-  <main>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xm-12">
-          <div class="ml-auto mr-auto">
-              {% block content %}
-              
-              {% endblock %}
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-2" id="bg">
+              <span class="navbar-text font-weight-bold text-dark px-3">
+              <br/>
+              <br/>
+              Filters
+              </span>
+                <!-- Navigation links in sidebar-->
+                <span class="text-dark">
+                  <br/>
+                  <br/>
+                  Date
+                  <br/>
+                  <br/>
+                  </span>
+                  <input type="text" class="form-control" value="06-16-2022">
+                  <br/>
+                <br/>
+                <span class="text-dark">
+                  Product
+                  </span>
+                <br/>
+                <br/>
+                <select class="custom-select custom-select-sm">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <br/>
+                <span class="text-dark">
+                  <br/>
+                  <br/>
+                  Sub product
+                  </span>
+                  <br/>
+                <br/>
+                <select class="custom-select custom-select-sm">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <br/>
+            </div>
+            <main>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xm-12">
+                    <div class="ml-auto mr-auto">
+                        {% block content %}
+                        
+                        {% endblock %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+
 
 
 </body>
