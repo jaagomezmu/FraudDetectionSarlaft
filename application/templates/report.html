@@ -1,4 +1,72 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>RESUMEN GENERAL . . .</h1>
+
+<div class="container-fluid vh-100">
+    <div class="row vh-100">
+        <div class="col-2 vh-100" id="bg">
+          <span class="navbar-text font-weight-bold text-dark px-3">
+          <br/>
+          <br/>
+          Filters
+          </span>
+            <!-- Navigation links in sidebar-->
+            <span class="text-dark">
+              <br/>
+              <br/>
+              Date
+              <br/>
+              <br/>
+              </span>
+              <input type="text" class="form-control" value="06-16-2022">
+              <br/>
+            <br/>
+            <span class="text-dark">
+              Product
+              </span>
+            <br/>
+            <br/>
+            <select class="custom-select custom-select-sm">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <br/>
+            <span class="text-dark">
+              <br/>
+              <br/>
+              Sub product
+              </span>
+              <br/>
+            <br/>
+            <select class="custom-select custom-select-sm">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <br/>
+        </div>
+        <main>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xm-12">
+                <div class="ml-auto mr-auto">
+                    <h1>RESUMEN GENERAL . . .</h1>
+                    <div id='chart' class='chart'”></div>
+   
+                    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+                    <script type='text/javascript'>
+                        var graphs = {{graphJSON | safe}};
+                        Plotly.plot('chart',graphs,{});
+                    </script>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
 {% endblock %}
