@@ -7,39 +7,32 @@
           <span class="navbar-text font-weight-bold text-dark px-3">
           <br/>
           <br/>
-          Filters
+          Filtered by:
           </span>
             <!-- Navigation links in sidebar-->
-            <span class="text-dark">
               <br/>
               <br/>
-              Date
+              <br/>
+              Start: {{session['startdate']}}
               <br/>
               <br/>
-              </span>
-              <form action="" method="POST" name="my-form">
-                {{ form.csrt_token }}
-                {{ form.startdate.label }} {{ form.startdate(class='datepicker') }} {{ form.hidden_tag() }}
-                <br/>
-                {{ form.enddate.label }} {{ form.enddate(class='datepicker') }} {{ form.hidden_tag() }}
-                <p>
-                  {{ form.submit() }}
-                </p>
-              </form>
-              <input type="text" class="form-control" value="06-16-2022">
               <br/>
-            <br/>
+              End: {{session['enddate']}}
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
             <span class="text-dark">
               Product
               </span>
             <br/>
             <br/>
-            <select class="custom-select custom-select-sm">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <br/>
             <span class="text-dark">
               <br/>
@@ -48,20 +41,15 @@
               </span>
               <br/>
             <br/>
-            <select class="custom-select custom-select-sm">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
             <br/>
+            
         </div>
         <main>
           <div class="container">
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xm-12">
                 <div class="ml-auto mr-auto">
-                    <h1>RESUMEN GENERAL . . .</h1>
+                    <h1>Completar con los otros filtros . . .</h1>
                     <div id='chart' class='chart'”></div>
    
                     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
