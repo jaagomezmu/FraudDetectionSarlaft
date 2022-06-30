@@ -17,8 +17,8 @@ class InfoForm(FlaskForm):
     enddate = DateField('End date', format = '%Y-%m-%d', validators=(validators.DataRequired(),))
     submit = SubmitField('Submit')
 
-transactions = pd.read_parquet(r'application\data\sample_transactions.parquet')
-users = pd.read_parquet(r'application\data\sample_users.parquet')
+transactions = pd.read_parquet('application/data/sample_transactions.parquet')
+users = pd.read_parquet('application/data/sample_users.parquet')
 
 @app.route("/")
 def index():
