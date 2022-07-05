@@ -11,6 +11,7 @@ import json
 import datetime
 import plotly
 import plotly.express as px
+from functions import mapa_ciudad
 
 class InfoForm(FlaskForm):
     startdate = DateField('Start date', format = '%Y-%m-%d', validators=(validators.DataRequired(),))
@@ -18,6 +19,7 @@ class InfoForm(FlaskForm):
     submit = SubmitField('Submit')
 
 transactions = pd.read_parquet('app/data/sample_transactions.parquet')
+transactions['producto'] = transactions['producto'].cat.remove_unused_categories()
 users = pd.read_parquet('app/data/sample_users.parquet')
 
 @app.route("/")
@@ -31,18 +33,24 @@ def report():
         session['startdate'] = form.startdate.data
         session['enddate'] = form.enddate.data
         return redirect(url_for('report_filtered'))
+    
     fig = px.bar(transactions, x='fecha_transaccion', y='movilizado', color='producto')
+    fig2 = mapa_ciudad()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("report.html", form = form, title = "Reports",graphJSON=graphJSON)
+    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template("report.html", form = form, title = "Reports",graph0 = graphJSON, graph1 = graphJSON2)
 
 @app.route("/report_filtered", methods=['GET','POST'])
 def report_filtered():
     stardate = datetime.datetime.strptime(session['startdate'],"%a, %d %b %Y %H:%M:%S GMT")
     enddate = datetime.datetime.strptime(session['enddate'],"%a, %d %b %Y %H:%M:%S GMT")
     df = transactions[(transactions['fecha_transaccion']>= stardate)&(transactions['fecha_transaccion']<= enddate)]
+    df['producto'] = df['producto'].cat.remove_unused_categories()
     fig = px.bar(df, x='fecha_transaccion', y='movilizado', color='producto')
+    fig2 = mapa_ciudad()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("report_filtered.html",graphJSON=graphJSON)
+    graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template("report_filtered.html",graph0 = graphJSON, graph1 = graphJSON2)
 
 
 @app.route("/user")
