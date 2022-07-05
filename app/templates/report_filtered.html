@@ -50,12 +50,17 @@
               <div class="col-md-12 col-sm-12 col-xm-12">
                 <div class="ml-auto mr-auto">
                     <h1>Completar con los otros filtros . . .</h1>
-                    <div id='chart' class='chart'”></div>
-   
+                    <div id='chart1' class='chart'”></div>
                     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
                     <script type='text/javascript'>
-                        var graphs = {{graphJSON | safe}};
-                        Plotly.plot('chart',graphs,{});
+                        var graph0 = {{graph0 | safe}};
+                        Plotly.plot('chart1',graph0,{});
+                    </script>
+                    <div id='chart2' class='chart'”></div>
+                    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+                    <script type='text/javascript'>
+                        var graph1 = {{graph1 | safe}};
+                        Plotly.plot('chart2',graph1,{});
                     </script>
 
                 </div>
