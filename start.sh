@@ -1,5 +1,5 @@
 #!/bin/bash
-app="docker.test"
+app="movii.app"
 docker build -t ${app} .
 docker run -d -p 8000:80 \
   --name=${app} \
