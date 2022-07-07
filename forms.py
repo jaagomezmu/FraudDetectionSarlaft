@@ -18,3 +18,9 @@ class InfoForm(FlaskForm):
     subproducto = SelectField("subproducto", choices=subprod,validators=(validators.DataRequired(),))
     user = IntegerField('usr')
     submit = SubmitField('Submit')
+
+class DataStore():
+    ini = None
+    fin = None
+    pro = None
+    sub = None

@@ -1,12 +1,10 @@
-from tracemalloc import start
 from app import app
-from forms import InfoForm
+from forms import InfoForm,DataStore
 from functions import mapa_ciudad
 from requests import session
 from flask import redirect, render_template, url_for, flash, request
 import pandas as pd
 import json
-import datetime
 import plotly
 import plotly.express as px
 
@@ -20,33 +18,31 @@ df_merge = transacciones_final.merge(usuarios_movii, how='left', on='usr_id')
 df_merge.rename(columns={'labels_x':'etiqueta_transaccion','labels_y':'etiqueta_usuarios', 'id':'id_transaccion'}, inplace = True)
 df_merge.drop(columns=['year','month'], inplace=True)
 
-startdate = ''
-enddate = ''
-producto = ''
-subproducto = ''
+data = DataStore()
+
 #########################
 ######## RUTAS ##########
 #########################
 
 @app.route("/",methods=['GET','POST'])
 def index():
-    form = InfoForm()
+    form = InfoForm(request.form)
     form.producto.choices = list(df_merge['producto'].unique())
     form.subproducto.choices = list(df_merge['sub_producto'].unique())
     if form.validate_on_submit():
         startdate = form.startdate.data
         print(startdate)
-        session['startdate'] = startdate
+        data.ini = startdate
         enddate = form.enddate.data
         print(enddate)
-        session['enddate']=enddate
+        data.fin = enddate
         product = form.producto.data
         print(product)
-        session['product']=product
+        data.pro = product
         subproduct = form.subproducto.data
         print(subproduct)
-        session['subproduct']=subproduct
-        return redirect(url_for("summary_report"))
+        data.sub = subproduct
+        return redirect(url_for("summary_report",startdate=startdate))
     frad_location = df_merge[df_merge['Anomaly']==True]
     fig2 = mapa_ciudad(frad_location['city'])
     graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
@@ -54,23 +50,17 @@ def index():
 
 @app.route("/summary_report",methods=['GET','POST'])
 def summary_report():
-    form = InfoForm()
-    stardate = pd.to_datetime(stardate, infer_datetime_format="%Y-%m-%d")
+    startdate = data.ini
+    enddate = data.fin
+    product = data.pro
+    subproduct = data.sub
+    stardate = pd.to_datetime(data.ini, format="%Y-%m-%d")
     print(stardate)
-    stardate = pd.to_datetime(enddate, infer_datetime_format="%Y-%m-%d")
-    print(producto)
-    print(subproducto)
-    df = df_merge[(df_merge['fecha_transaccion']>= stardate)&(df_merge['fecha_transaccion']<= enddate)]
-    df['producto'] = df['producto'].cat.remove_unused_categories()
-    validacion1 = producto in list(df['producto'])
-    if validacion1 == True:
-        df2 = df[df['producto']== producto]
-    else:
-        new_message = 'product is not reported'
-        flash(new_message)
-    fig = px.line(df2, x='fecha_transaccion', y='movilizado', color='producto')
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("report_filtered.html",form = form, graph0 = graphJSON)
+    enddate = pd.to_datetime(enddate, format="%Y-%m-%d")
+    print(enddate)
+    print(product)
+    print(subproduct)
+    return render_template("report_filtered.html", startdate=startdate, enddate = enddate, producto=product, subproducto=subproduct)
 
 
 @app.route("/new_user",methods=['GET','POST'])
@@ -93,4 +83,4 @@ def new_user():
 @app.route("/user_summary_report", methods=['GET','POST'])
 def user_summary_report():
 
-    return render_template("user_filtered.html")
+    return render_template("user_filtered.html", usuario=id_user)

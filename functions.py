@@ -20,11 +20,7 @@ def mapa_ciudad(x = df_merge['city']):
         lat="lat",
         lon="lng",
         hover_name="city",
-        center=go.layout.mapbox.Center(
-            lat=4.5,
-            lon=-74
-        ),
-        size="size",
-    ).update_layout(mapbox={"style": "carto-positron", "zoom": 4}, margin={"t":0,"b":50,"l":0,"r":0})
+        center=go.layout.mapbox.Center(lat=4.5,lon=-74),
+            size="size").update_layout(mapbox={"style": "carto-positron", "zoom": 4}, margin={"t":0,"b":50,"l":0,"r":0})
 
     return mapa
