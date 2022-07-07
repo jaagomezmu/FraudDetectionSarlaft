@@ -1,7 +1,8 @@
 from flask import Flask
 
 app = Flask(__name__)
-app.secret_key = "cambiar_la_contraseña"
+app.config['SECRET_KEY'] = "#$%^&*+-8787Aqd"
+
 
 from app import routes
 
