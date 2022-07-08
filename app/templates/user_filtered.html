@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="container-fluid vh-85">
-    <div class="row vh-100">
+<div class="container-fluid vh">
+    <div class="row">
         <div class="col-2 vh-100" id="bg">
           <span class="navbar-text font-weight-bold text-dark px-3">
           <br/>
           <br/>
-          USER ID:
+          <u>Modeling results</u>
           </span>
           <br/>
-          {{usuario}}
+          <p>
+            The user {{usuario}} has mobilized by transactions on the platform {{t_mobilized}} COP in a period of {{deltaday}}. According to the clustering, it is {{in_or_out}} for fraud behavior </p>
+          </p>
+          
           <br/>
           <br/>
           <br/>
@@ -28,9 +31,27 @@
           <br/>
           <br/>
       </div>
-      <div class="col-10">
-        <h4>Aqui aquello</h4>
-      </div>
+
+        <div class="col-4">
+          <i><h4>True anomaly values are a sign of fraud, or an anomaly score clearly different from 0.<h4></i>
+            <div id='chart2' class='chart'>
+              <script type='text/javascript'>
+                var graph1 = {{graph1 | safe}};
+                Plotly.plot('chart2',graph1,{});
+              </script>
+            </div>
+            <div class="col-8">
+              <h4>Summary<h4>
+                <div id='chart1' class='chart'>
+                  <script type='text/javascript'>
+                    var graph0 = {{graph0 | safe}};
+                    Plotly.plot('chart1',graph0,{});
+                  </script>
+                </div>
+            </div>
+          
+        </div>
+
     </div>
 </div>
 

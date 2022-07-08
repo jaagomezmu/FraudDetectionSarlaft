@@ -30,9 +30,22 @@
           </form>
         </div>
       <div class="col-10">
-        <h1> </h1>
-        <img style="text-align: left;" src="{{url_for('static', filename='left_arrow.png')}}" width="100" height="50"/>
-        <h5>Change this!:</h5>
+        <i><h4>The total number of users with anomalous behavior corresponds to {{account1}} of the total number of users registered in Movii.<h4></i>
+          <div id='chart2' class='chart'>
+            <script type='text/javascript'>
+              var graph0 = {{graph0 | safe}};
+              Plotly.plot('chart2',graph0,{});
+            </script>
+          </div>
+          <div class="col-10">
+            <i><h4>The total number of transactions with anomalous behavior corresponds to {{account2}} of the total number of transactions registered in Movii.<h4></i>
+              <div id='chart1' class='chart'>
+                <script type='text/javascript'>
+                  var graph1 = {{graph1 | safe}};
+                  Plotly.plot('chart1',graph1,{});
+                </script>
+              </div>
+          </div>
 
       </div>
     </div>

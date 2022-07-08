@@ -34,24 +34,26 @@
           <br/>
           <br/>
           <span class="navbar-text font-weight-bold text-dark px-3">
-            Subproduct
           </span>
           <br/>
-          {{subproducto}}
           <br/>
           <br/>
           <span class="text-dark">
           <br/>
       </div>
-      <div class="col-10">
-        <h4>Aqui aquello</h4>
+      <div class="col-8">
+        <h4>Summary</h4>
         <div id='chart1' class='chart'”>
           <script type='text/javascript'>
-            var graph0 = {{graphJSON | safe}};
+            var graph0 = {{graph0 | safe}};
             Plotly.plot('chart1',graph0,{});
           </script>
         </div>
-
+        <div>
+          <i>
+            According to the filters applied, the table shows the anomalous behavior by by by-product, number of transactions, abnormality score and total mobilized. The user is suggested to take into account the displayed by-products to reduce the sources of anomalies. For your reference, there were {{filtered_anomalies}} anomalous behaviors in {{deltaday}}.
+          </i>
+        </div>
       </div>
     </div>
 </div>

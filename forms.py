@@ -15,7 +15,6 @@ class InfoForm(FlaskForm):
     startdate = DateField('Start date', format = '%Y-%m-%d', validators=(validators.DataRequired(),))
     enddate = DateField('End date', format = '%Y-%m-%d', validators=(validators.DataRequired(),))
     producto = SelectField("producto", choices=prod,validators=(validators.DataRequired(),))
-    subproducto = SelectField("subproducto", choices=subprod,validators=(validators.DataRequired(),))
     user = IntegerField('usr')
     submit = SubmitField('Submit')
 
@@ -23,4 +22,4 @@ class DataStore():
     ini = None
     fin = None
     pro = None
-    sub = None
+    ids = None
